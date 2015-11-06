@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+	<!-- https://docs.oracle.com/cd/E24329_01/web.1211/e21049/web_xml.htm#WBAPP515 -->
+	<!-- http://stackoverflow.com/questions/30026448/framing-multiple-servlet-request-url-pattern -->
+	<!-- http://www.coderanch.com/t/610432/java-Web-Component-SCWCD/certification/getContextPath-getServletPath-getPathInfo -->
+	
+
+	<servlet>
+		<servlet-name>Valencia_594</servlet-name>
+		<servlet-class>com.appspot.valencia594.Valencia_594Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Valencia_594</servlet-name>
+		<url-pattern>/valencia_594</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TestLogin</servlet-name>
+		<servlet-class>com.appspot.valencia594.TestLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestLogin</servlet-name>
+		<url-pattern>/testlogin</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ChannelConnected</servlet-name>
+		<servlet-class>com.appspot.valencia594.mmo.ChannelConnectedServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChannelConnected</servlet-name>
+		<url-pattern>/_ah/channel/connected/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ChannelDisconnected</servlet-name>
+		<servlet-class>com.appspot.valencia594.mmo.ChannelDisconnectedServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChannelDisconnected</servlet-name>
+		<url-pattern>/_ah/channel/disconnected/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>WorldJoin</servlet-name>
+		<servlet-class>com.appspot.valencia594.mmo.WorldJoinServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorldJoin</servlet-name>
+		<url-pattern>/mmo/join</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>WorldUpdate</servlet-name>
+		<servlet-class>com.appspot.valencia594.mmo.WorldUpdateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorldUpdate</servlet-name>
+		<url-pattern>/mmo/update</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	
+	<security-constraint>
+        <web-resource-collection>
+            <web-resource-name>mmo</web-resource-name>
+            <url-pattern>/mmo/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+	<security-constraint>
+        <web-resource-collection>
+            <web-resource-name>test</web-resource-name>
+            <url-pattern>/testlogin</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+	
+	<security-constraint>
+        <web-resource-collection>
+            <web-resource-name>mmo-admin</web-resource-name>
+            <url-pattern>/mmo-admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>	
+</web-app>
