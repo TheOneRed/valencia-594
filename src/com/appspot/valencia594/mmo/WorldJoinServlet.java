@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.api.client.json.JsonGenerator;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 import com.google.appengine.api.users.User;
@@ -30,6 +32,12 @@ public class WorldJoinServlet extends HttpServlet {
 		
 		// return json with channel token and user state		
 		resp.setContentType("application/json;charset=UTF-8");
-		resp.getWriter().print("{ \"token\":\"" + token + "\"}");
+		JacksonFactory jFact = new JacksonFactory();
+		final JsonGenerator jGen = jFact.createJsonGenerator(resp.getWriter());
+		jGen.writeStartObject();
+		jGen.writeFieldName("token");
+		jGen.writeString(token);
+		jGen.writeEndObject();
+		jGen.close();
 	}
 }
