@@ -26,19 +26,27 @@ public class WorldJoinServlet extends HttpServlet {
 		
 		// get user state
 		
+		// add user channel to world
+		final Player player = new Player(user.getUserId(), user.getNickname());
+		World.players.put(user.getUserId(), player);
+		
 		// create channel
 		final ChannelService channelService = ChannelServiceFactory.getChannelService();
 		final String token = channelService.createChannel(user.getUserId());
 		
 		// return json with channel token and user state		
 		resp.setContentType("application/json;charset=UTF-8");
-		JacksonFactory jFact = new JacksonFactory();
+		final JacksonFactory jFact = new JacksonFactory();
 		final JsonGenerator jGen = jFact.createJsonGenerator(resp.getWriter());
 		jGen.writeStartObject();
-		jGen.writeFieldName("username");
+		jGen.writeFieldName("userName");
 		jGen.writeString(user.getNickname());
 		jGen.writeFieldName("token");
 		jGen.writeString(token);
+		jGen.writeFieldName("worldX");
+		jGen.writeNumber(player.worldX);
+		jGen.writeFieldName("worldY");
+		jGen.writeNumber(player.worldY);
 		jGen.writeEndObject();
 		jGen.close();
 	}

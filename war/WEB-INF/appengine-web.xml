@@ -16,6 +16,13 @@
   <inbound-services>
   	<service>channel_presence</service>
   </inbound-services>
+    
+  <static-files>
+  	<include path="/*.html" />
+  	<include path="/components/**.js" />
+  	<include path="/models/**.js" />
+  	<include path="/scripts/**.js" />
+  </static-files>
   
   <!--
     HTTP Sessions are disabled by default. To enable HTTP sessions specify:

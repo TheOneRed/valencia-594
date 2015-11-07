@@ -16,13 +16,14 @@ public class ChannelDisconnectedServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		
-		ChannelService channelService = ChannelServiceFactory.getChannelService();
-		ChannelPresence presence = channelService.parsePresence(req);
-		
+		final ChannelService channelService = ChannelServiceFactory.getChannelService();
+		final ChannelPresence presence = channelService.parsePresence(req);
+				
 		if (!presence.isConnected()) {
 			// save client state to db
 			
 			// remove client from world
+			World.players.remove(presence.clientId());
 		}
 	}
 }
