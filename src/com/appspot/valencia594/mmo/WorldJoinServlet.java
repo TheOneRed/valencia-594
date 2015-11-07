@@ -35,6 +35,8 @@ public class WorldJoinServlet extends HttpServlet {
 		JacksonFactory jFact = new JacksonFactory();
 		final JsonGenerator jGen = jFact.createJsonGenerator(resp.getWriter());
 		jGen.writeStartObject();
+		jGen.writeFieldName("username");
+		jGen.writeString(user.getNickname());
 		jGen.writeFieldName("token");
 		jGen.writeString(token);
 		jGen.writeEndObject();
